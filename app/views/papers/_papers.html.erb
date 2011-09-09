@@ -1,0 +1,15 @@
+<% if papers.length == 0 %>
+<div class="empty_list">There are no papers to display</div>
+<% else %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Filename</th>
+    </tr>
+    <%= render :partial => 'papers/paper', :collection => papers, :locals => { :project => (defined? project ? project : nil) } %>
+  </table>
+<% end %>

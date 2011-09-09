@@ -1,0 +1,3 @@
+<h1>Note for <%= params[:notable_type].titleize %> '<%= @parent %>' <%= link_to_large_edit 'Edit', send("edit_#{params[:notable_type]}_note_path", @parent, @note) %></h1>
+<%= @note.text_html %>
+<%= link_to 'Back', @parent %>

@@ -1,0 +1,14 @@
+<% if projects.length == 0 %>
+<div class="empty_list">There are no projects to display</div>
+<% else %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Name</th>
+      <th>Summary</th>
+    </tr>
+    <%= render :partial => 'projects/project', :collection => projects %>
+  </table>
+<% end %>
+

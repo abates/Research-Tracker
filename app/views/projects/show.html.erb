@@ -1,0 +1,29 @@
+<h1>Project Details <%= link_to_large_edit 'Edit', edit_project_path(@project) %></h1>
+<%= link_to 'Back', root_path %>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @project.name %></dd>
+</dl>
+
+<dl>
+  <dt>Description:</dt>
+  <dd><%= @project.description_html %></dd>
+</dl>
+
+<br />
+<hr />
+<dl>
+  <dt>Notes <%= link_to_small_annotate 'New Note', new_project_note_path(@project) %>:</dt>
+  <dd>
+    <%= render :partial => 'notes/notes', :locals => { :parent => @project } %>
+  </dd>
+</dl>
+
+<hr />
+<dl>
+  <dt>Papers <%= link_to_small_add 'New Paper', new_project_paper_path(@project) %> <%= link_to_small_reference 'Reference Existing Paper', project_papers_path(@project) %>:</dt>
+  <dd>
+    <%= render :partial => 'papers/papers', :locals => { :papers => @project.papers } %>
+  </dd>
+</dl>

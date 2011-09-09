@@ -1,0 +1,6 @@
+<li>
+  <b><%= definition.part.nil? || definition.part.empty? ? '' : "#{definition.part}:"  %></b> 
+  <%= definition.text %> 
+  <%= link_to_small_edit 'Edit', edit_term_definition_path(definition.term.name, definition) %> 
+  <%= link_to_small_destroy 'Delete', term_definition_path(definition.term.name, definition), :confirm => 'Are you sure?', :method => :delete %>
+</li>

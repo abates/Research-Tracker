@@ -1,0 +1,31 @@
+<h1>Paper '<%= @paper.original_filename %>'</h1>
+<%= link_to_large_edit 'Edit', edit_paper_path(@paper) %>
+<%= link_to_large_destroy 'Delete', @paper, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to_large_download 'Download', download_paper_path(@paper) %>
+<%= link_to_large_view 'View', view_paper_path(@paper) %>
+
+<dl>
+  <dt>Filename:</dt>
+  <dd><%= @paper.original_filename %></dd>
+</dl>
+
+<dl>
+  <dt>Terms:</dt>
+  <dd><%= term_links @paper %></dd>
+</dl>
+
+<dl>
+  <dt>Notes <%= link_to_small_annotate 'New Note', new_paper_note_path(@paper) %>:</dt>
+  <dd>
+    <%= render :partial => 'notes/notes', :locals => { :parent => @paper } %>
+  </dd>
+</dl>
+
+<% @paper.bib_items.each do |name, value| %>
+<dl>
+  <dt><%= name.to_s.titleize %>:</dt>
+  <dd><%= value %></dd>
+</dl>
+<% end %>
+
+<%= link_to 'Back', root_path %>

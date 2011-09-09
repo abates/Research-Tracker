@@ -1,0 +1,22 @@
+<%= form_for([@term, @definition], :url => (@definition.id.nil? ? term_definitions_path(@term.name) : term_definition_path(@term.name, @definition))) do |f| %>
+  <% if @definition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@definition.errors.count, "error") %> prohibited this definition from being saved:</h2>
+
+      <ul>
+      <% @definition.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <dl>
+    <dt><%= f.label :text %>:</dt>
+    <dd><%= f.text_area :text, :cols => 120, :rows => 40 %></dd>
+  </dl>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

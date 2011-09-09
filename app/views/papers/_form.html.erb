@@ -1,0 +1,43 @@
+<%= form_for(@paper, :html => { :multipart => true }) do |f| %>
+  <% if @paper.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
+
+      <ul>
+      <% @paper.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %><% if @paper.new_record? %>
+
+  <dl>
+    <dt><%= f.label :file %>:</dt>
+    <dd><%= f.file_field :file %></dd>
+  </dl>
+  <% end %>
+  <dl>
+    <dt><%= f.label :term_names %>:</dt>
+    <dd><%= f.text_field :term_names %></dd>
+  </dl>
+
+  <dl>
+    <dt><%= f.label :bibtex %>:</dt>
+    <dd><%= f.text_area :bibtex, :cols => 120, :rows => 40  %></dd>
+  </dl>
+
+  <dl>
+    <dt><%= f.label :relevancy %>:</dt>
+    <dd><%= f.text_field :relevancy %></dd>
+  </dl>
+
+  <dl>
+    <dt><%= f.label :read %>:</dt>
+    <dd><%= f.check_box :read %></dd>
+  </dl>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

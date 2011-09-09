@@ -1,0 +1,22 @@
+<%= form_for([@parent, @note]) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <dl>
+    <dt><%= f.label :text %> <small>(<a href='http://redcloth.org/textile/' target='_blank'>formatting</a>)</small>:</dt>
+    <dd><%= f.text_area :text, :cols => 120, :rows => 40  %></dd>
+  </dl>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

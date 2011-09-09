@@ -1,0 +1,6 @@
+<h1>Note for <%= params[:notable_type].titleize %> '<%= @parent %>'</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', [@parent, @note] %> |
+<%= link_to 'Back', @parent %>

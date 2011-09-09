@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to_small_show 'show', [parent, note] %></td>
+  <td><%= link_to_small_edit 'edit', send("edit_#{parent.class.name.underscore}_note_path", parent, note) %></td>
+  <td><%= link_to_small_destroy 'delete', [parent, note], :confirm => 'Are you sure?', :method => :delete %></td>
+  <td><%= note.text_short_html %></td>
+</tr>

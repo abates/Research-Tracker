@@ -1,0 +1,13 @@
+<% if parent.notes.length == 0 %>
+<div class="empty_list">There are no notes to display</div>
+<% else %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Summary</th>
+    </tr>
+    <%= render :partial => 'notes/note', :collection => parent.notes, :locals => { :parent => parent } %>
+  </table>
+<% end %>

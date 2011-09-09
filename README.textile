@@ -1,0 +1,24 @@
+h1. Description
+This is a simple Rails application to help organize data used in common college level research projects.  The original intended use was to help organize the research data for a Masters Thesis.  The tool can handle multiple projects that reference a common set of professional papers.  Papers can be uploaded as attachments so that all reference papers are located in the same place.  Of course this means it is up to you to make sure you aren't violating any copyrights.  In addition to being a repository for papers, the tool can associated lists of formatted (textile) notes with both the project as well as individual papers.  Finally, papers can be associated with terms.  When a new term is created the definitions are downloaded from Wiktionary.  Once the definitions are created the user can update or remove any of the definitions.
+
+h1. Features
+- Rich text using Textile markdown.  Implemented using RedCloth
+- Code highlighting of markdown text with Coderay
+- Bibtex tracking for a research project
+- Task tracking for a research project
+- Term tracking and definitions
+- Task creation and tracking for a project
+
+h1. Installation
+
+# Clone the repo to your local Rails environment: git clone git://github.com/abates/Research-Tracker.git
+# Create the dev, test and production databases
+# Edit config/database.yml to point to your new databases (optionally edit Gemfile if you aren't using Mysql for your database)
+# Rake the database: rake db:migrate
+# Add list of authorized users to config/auth_table.yml (currently only google_apps accounts hosted on omeganetserv.com are allowed.  See config/initializers/omniauth.rb for changes
+# Browse to the URL and enjoy!
+
+h1. Future Enhancements
+# Multi-user interface to allow different people to maintain their own projects as well as allowing project owners to add collaborators
+# Update omniauth config to allow openid from several providers
+

@@ -1,0 +1,7 @@
+<h1>Definitions of <%= @term.name.titleize %> <%= link_to_large_add 'New Definition', new_term_definition_path(@term.name) %></h1>
+<dl>
+  <dt><%= @term.name %>:</dt>
+  <dd><ol><%= render @term.definitions %></ol></dd>
+</dl>
+
+<%= link_to 'Back', terms_path %>

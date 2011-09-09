@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to_small_edit 'Edit', edit_project_path(project) %></td>
+  <td><%= link_to_small_destroy 'Delete', project, :confirm => 'Are you sure?', :method => :delete %></td>
+  <td><%= link_to project.name, project %></td>
+  <td><%= project.description_short_html %></td>
+</tr>
+

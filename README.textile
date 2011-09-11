@@ -11,6 +11,17 @@ h1. Features
 - Task tracking for a research project
 - Term tracking and definitions
 - Task creation and tracking for a project
+- Ability to backup a project to a file
+
+h1. Requirements
+# mysql2 ~> 0.2.7
+# ruby-openid
+# omniauth
+# bibtex-ruby
+# RedCloth
+# coderay
+# rubyzip
+
 
 h1. Installation
 

@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+
+    def redirect_back
+      begin
+        redirect_to :back
+      rescue ActionController::RedirectBackError
+        redirect_to root_path
+      end
+    end
 end

@@ -1,5 +1,4 @@
 Thesis::Application.routes.draw do
-
   resources :projects do
     resources :notes
     resources :papers do
@@ -8,10 +7,7 @@ Thesis::Application.routes.draw do
         get :remove
       end
     end
-  end
-
-  resources :terms do
-    resources :definitions
+    resources :tasks
   end
 
   resources :papers do
@@ -20,6 +16,14 @@ Thesis::Application.routes.draw do
       get :view
       get :download
     end
+  end
+
+  resources :tasks do
+    resources :notes
+  end
+
+  resources :terms do
+    resources :definitions
   end
 
   match "/auth/:provider/callback" => "sessions#create"

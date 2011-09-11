@@ -39,6 +39,13 @@ class CreateThesisDb < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :tasks, :force => true do |t|
+      t.references :project
+      t.integer :percent_complete
+      t.date :completed_by
+      t.text :description
+    end
+
     create_table :papers_terms, :id => false, :force => true do |t|
       t.references :paper
       t.references :term

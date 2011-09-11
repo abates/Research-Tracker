@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to_small_show 'show', [task.project, task] %></td>
+  <td><%= link_to_small_edit 'edit', edit_project_task(task.project, task) %></td>
+  <td><%= link_to_small_destroy 'delete', [task.project, task], :confirm => 'Are you sure?', :method => :delete %></td>
+  <td><%= task.description_short_html %></td>
+</tr>

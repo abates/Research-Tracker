@@ -1,0 +1,13 @@
+<% if tasks.length == 0 %>
+<div class="empty_list">There are no tasks to display</div>
+<% else %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Summary</th>
+    </tr>
+    <%= render :partial => 'tasks/task', :collection => tasks %>
+  </table>
+<% end %>

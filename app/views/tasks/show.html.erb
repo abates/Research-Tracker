@@ -1,0 +1,26 @@
+<dl>
+  <dt>Project:</dt>
+  <dd><%= @task.project %></dd>
+</dl>
+
+<dl>
+  <dt>Completed by:</dt>
+  <dd><%= @task.completed_by %></dd>
+</dl>
+
+<dl>
+  <dt>Description:</dt>
+  <dd><%= @task.description_html %></dd>
+</dl>
+
+<br />
+<hr />
+<dl>
+  <dt>Notes <%= link_to_small_annotate 'New Note', new_task_note_path(@task) %>:</dt>
+  <dd>
+    <%= render :partial => 'notes/notes', :locals => { :parent => @task } %>
+  </dd>
+</dl>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

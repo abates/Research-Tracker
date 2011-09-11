@@ -91,6 +91,11 @@ p {
   text-indent: 10px;
 }
 
+select {
+  padding-top: 0;
+  margin-top: 0;
+}
+
 td {
   vertical-align: top;
 }

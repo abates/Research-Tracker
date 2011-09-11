@@ -12,15 +12,19 @@
   <% end %>
 
   <dl>
-    <dt><%= f.label :project %></dt>
-    <dd><%= f.text_field :project %></dd>
+    <dt><%= f.label :name %>:</dt>
+    <dd><%= f.text_field :name %></dd>
   </dl>
   <dl>
-    <dt><%= f.label :description %></dt>
+    <dt><%= f.label :description %>:</dt>
     <dd><%= f.text_area :description %></dd>
   </dl>
   <dl>
-    <dt><%= f.label :completed_by %></dt>
+    <dt><%= t.label :percent_complete %>:</dt>
+    <dd><%= f.number_field :percent_complete %></dd>
+  </dl>
+  <dl>
+    <dt><%= f.label :completed_by %>:</dt>
     <dd><%= f.date_select :completed_by %></dd>
   </dl>
   <div class="actions">

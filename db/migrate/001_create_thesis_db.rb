@@ -11,7 +11,6 @@ class CreateThesisDb < ActiveRecord::Migration
       t.string :original_filename
       t.string :content_type
       t.text :bibtex
-      t.integer :relevancy
       t.boolean :read
       t.timestamps
     end
@@ -41,9 +40,10 @@ class CreateThesisDb < ActiveRecord::Migration
 
     create_table :tasks, :force => true do |t|
       t.references :project
+      t.string :name
+      t.text :description
       t.integer :percent_complete
       t.date :completed_by
-      t.text :description
     end
 
     create_table :papers_terms, :id => false, :force => true do |t|

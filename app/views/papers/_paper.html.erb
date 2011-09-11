@@ -2,7 +2,7 @@
   <td><%= link_to_small_edit 'Edit', edit_paper_path(paper) %></td>
   <td><%= link_to_small_destroy 'Delete', paper, :confirm => 'Are you sure?', :method => :delete %></td>
   <td><%= link_to_small_download 'Download', download_paper_path(paper) %></td>
-  <td><%= link_to_small_view 'View', view_paper_path(paper) %></td>
+  <td><%= link_to_small_view 'View', view_paper_path(paper), :target => '_blank' %></td>
   <td><%= !defined?(project) || project.nil? ? '&nbsp;'.html_safe : link_to('Reference', reference_project_paper_path(project, paper)) %></td>
   <td><%= link_to paper.original_filename, paper %></td>
 </tr>

@@ -16,7 +16,7 @@
 <dl>
   <dt>Tasks <%= link_to_small_annotate 'New Task', new_project_task_path(@project) %>:</dt>
   <dd>
-    <%= render :partial => 'tasks/tasks', :locals => { :task => @project.tasks } %>
+    <%= render :partial => 'tasks/tasks', :locals => { :tasks => @project.tasks } %>
   </dd>
 </dl>
 

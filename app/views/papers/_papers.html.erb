@@ -10,6 +10,6 @@
       <th></th>
       <th>Filename</th>
     </tr>
-    <%= render :partial => 'papers/paper', :collection => papers, :locals => { :project => (defined? project ? project : nil) } %>
+    <%= render :partial => 'papers/paper', :collection => papers, :locals => { :project => (defined?(project) ? project : nil) } %>
   </table>
 <% end %>

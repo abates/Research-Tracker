@@ -1,2 +1,2 @@
 <h1>Papers <%= link_to_large_add 'Add', new_paper_path %></h1>
-<%= render :partial => 'papers/papers', :locals => { :papers => @papers } %>
+<%= render :partial => 'papers/papers', :locals => { :papers => @papers, :project => @project } %>

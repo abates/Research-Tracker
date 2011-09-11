@@ -10,6 +10,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def backup
+    @project = Project.find(params[:id])
+    filename = Time.now.strftime('%Y%m%d_%H.%M.%S')
+    filename = "rt_backup_#{filename}.zip"
+    backup = @project.backup
+    send_file(backup, :filename => filename, :type => 'application/zip')
+  end
+
   # GET /projects/1
   # GET /projects/1.xml
   def show

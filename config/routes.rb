@@ -1,5 +1,9 @@
 Thesis::Application.routes.draw do
   resources :projects do
+    member do
+      get :backup
+    end
+
     resources :notes
     resources :papers do
       member do

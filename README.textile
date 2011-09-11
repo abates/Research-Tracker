@@ -1,3 +1,4 @@
+
 h1. Description
 
 This is a simple Rails application to help organize data used in common college level research projects.  The original intended use was to help organize the research data for a Masters Thesis.  The tool can handle multiple projects that reference a common set of professional papers.  Papers can be uploaded as attachments so that all reference papers are located in the same place.  Of course this means it is up to you to make sure you aren't violating any copyrights.  In addition to being a repository for papers, the tool can associated lists of formatted (textile) notes with both the project as well as individual papers.  Finally, papers can be associated with terms.  When a new term is created the definitions are downloaded from Wiktionary.  Once the definitions are created the user can update or remove any of the definitions.

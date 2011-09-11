@@ -1,16 +1,21 @@
 require 'bibtex'
 
 class Paper < ActiveRecord::Base
+  has_and_belongs_to_many :projects
   has_and_belongs_to_many :terms
   has_many :notes, :as => :notable
 
   attr_reader :bib_items, :paper_type
 
-  @@dir = 'data/attachments'
+  @@dir = "#{::Rails.root}/data/attachments"
 
   def after_destroy
-    unless filename.nil? || filename.empty?
-      File.delete(file)
+    begin
+      unless filename.nil? || filename.empty?
+        File.delete(file)
+      end
+    rescue => e
+      logger.warn("Failed to delete file: #{e}")
     end
   end
 
@@ -45,7 +50,7 @@ class Paper < ActiveRecord::Base
     write_attribute(:original_filename, data.original_filename)
     write_attribute(:content_type, data.content_type)
     filename = Digest::SHA1.hexdigest("#{Time.now.to_s}#{original_filename}")
-    write_attribute(:filename, filename)
+    write_attribute(:filename, "attachment_#{filename}")
 
     File.open(file, "wb") { |f| f.write(data.read) }
   end

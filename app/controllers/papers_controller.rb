@@ -53,10 +53,14 @@ class PapersController < ApplicationController
   # POST /papers
   # POST /papers.xml
   def create
-    @paper = Paper.new(params[:paper])
+      @paper = Paper.new(params[:paper])
 
     respond_to do |format|
       if @paper.save
+        unless (@project.nil?)
+          @project.papers << @paper
+        end
+
         format.html { redirect_to(@paper, :notice => 'Paper was successfully created.') }
         format.xml  { render :xml => @paper, :status => :created, :location => @paper }
       else
@@ -89,7 +93,7 @@ class PapersController < ApplicationController
     @paper.destroy
 
     respond_to do |format|
-      format.html { redirect_to(root_url) }
+      format.html { redirect_back }
       format.xml  { head :ok }
     end
   end
@@ -118,9 +122,9 @@ class PapersController < ApplicationController
     def get_file attachment, download=false
       unless attachment.nil?
         if (download)
-          send_file("#{::Rails.root}/data/attachments/#{attachment.filename}", :filename => attachment.original_filename, :type => attachment.content_type)
+          send_file(attachment.file, :filename => attachment.original_filename, :type => attachment.content_type)
         else
-          send_file("#{::Rails.root}/data/attachments/#{attachment.filename}", :type => attachment.content_type, :disposition => 'inline')
+          send_file(attachment.file, :type => attachment.content_type, :disposition => 'inline')
         end
       else
         head :not_found

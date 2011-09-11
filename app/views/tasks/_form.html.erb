@@ -20,8 +20,8 @@
     <dd><%= f.text_area :description %></dd>
   </dl>
   <dl>
-    <dt><%= t.label :percent_complete %>:</dt>
-    <dd><%= f.number_field :percent_complete %></dd>
+    <dt><%= f.label :percent_complete %>:</dt>
+    <dd><%= f.number_field :percent_complete, :min => 0, :max => 100 %></dd>
   </dl>
   <dl>
     <dt><%= f.label :completed_by %>:</dt>

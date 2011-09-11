@@ -7,4 +7,5 @@ gem 'omniauth'
 gem 'bibtex-ruby'
 gem 'RedCloth'
 gem 'coderay'
+gem 'rubyzip'
 

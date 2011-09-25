@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
       if (session[:auth].nil?)
         redirect_to '/thesis/auth/google_apps'
       else
-        logger.debug USERS.inspect
-        logger.debug session.inspect
         unless (USERS[session[:auth]['uid']] == session[:auth]['user_info']['email'])
           redirect_to 'http://www.google.com'
           return

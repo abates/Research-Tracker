@@ -8,7 +8,7 @@ class Paper < ActiveRecord::Base
   after_destroy :delete_file
   after_initialize :parse_bibtex
 
-  attr_reader :bib_items, :paper_type
+  attr_reader :parsed_bibtex, :bib_items, :paper_type
 
   @@dir = "#{::Rails.root}/data/attachments"
 

@@ -1,4 +1,8 @@
 module PapersHelper
+  def citation_key paper
+    paper.parsed_bibtex.nil? ? '' : paper.parsed_bibtex.key
+  end
+
   def term_names paper
     paper.term_names.join(', ');
   end

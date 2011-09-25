@@ -18,7 +18,7 @@
   <% end %>
   <dl>
     <dt><%= f.label :term_names %>:</dt>
-    <dd><%= f.text_field :term_names %></dd>
+    <dd><%= f.text_field :term_names, :value => term_names(@paper) %></dd>
   </dl>
 
   <dl>

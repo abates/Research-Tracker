@@ -14,6 +14,15 @@
 <br />
 <hr />
 <dl>
+  <dt>Documents <%= link_to_small_add 'New Document', new_project_document_path(@project) %>:</dt>
+  <dd>
+    <%= render :partial => 'documents/documents', :locals => { :documents => @project.documents } %>
+  </dd>
+</dl>
+
+<br />
+<hr />
+<dl>
   <dt>Tasks <%= link_to_small_annotate 'New Task', new_project_task_path(@project) %>:</dt>
   <dd>
     <%= render :partial => 'tasks/tasks', :locals => { :tasks => @project.tasks } %>

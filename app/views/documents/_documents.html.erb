@@ -1,0 +1,13 @@
+<% if documents.length == 0 %>
+<div class="empty_list">There are no documents to display</div>
+<% else %>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Name</th>
+    </tr>
+    <%= render :partial => 'documents/document', :collection => documents %>
+  </table>
+<% end %>

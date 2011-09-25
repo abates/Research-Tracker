@@ -11,6 +11,7 @@ Thesis::Application.routes.draw do
         get :remove
       end
     end
+    resources :documents
     resources :tasks
   end
 
@@ -21,6 +22,8 @@ Thesis::Application.routes.draw do
       get :download
     end
   end
+
+  resources :documents
 
   resources :tasks do
     resources :notes

@@ -4,47 +4,13 @@ class Paper < ActiveRecord::Base
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :terms
   has_many :notes, :as => :notable
+  after_save :set_terms, :update_bibtex_key
+  after_destroy :delete_file
+  after_initialize :parse_bibtex
 
   attr_reader :bib_items, :paper_type
 
   @@dir = "#{::Rails.root}/data/attachments"
-
-  def after_destroy
-    begin
-      unless filename.nil? || filename.empty?
-        File.delete(file)
-      end
-    rescue => e
-      logger.warn("Failed to delete file: #{e}")
-    end
-  end
-
-  def after_initialize
-    @bib_items = {}
-    unless bibtex.nil? || bibtex.empty?
-      tex = BibTeX.parse(bibtex)[0]
-
-      if (tex.instance_of? BibTeX::Error)
-        @bib_items[:bibtex_parse_error] = tex.content
-        @bib_items[:bibtex_error_trace] = tex.trace
-      else
-        tex.entries.each do |k, v|
-          @bib_items[k] = v
-        end
-      end
-    end
-  end
-
-  def after_save
-    terms.clear
-    @term_names.split(/\s*,\s*/).each do |name|
-      term = Term.first(:conditions => ['name=?', name])
-      if (term.nil?)
-        term = Term.create(:name => name)
-      end
-      terms << term
-    end
-  end
 
   def file= data
     write_attribute(:original_filename, data.original_filename)
@@ -73,4 +39,60 @@ class Paper < ActiveRecord::Base
   def to_s
     original_filename
   end
+
+  private
+    def parse_bibtex
+      @bib_items = {}
+      unless bibtex.nil? || bibtex.empty?
+	@parsed_bibtex = BibTeX.parse(bibtex)[0]
+
+	if (@parsed_bibtex.instance_of? BibTeX::Error)
+	  @bib_items[:bibtex_parse_error] = @parsed_bibtex.content
+	  @bib_items[:bibtex_error_trace] = @parsed_bibtex.trace
+	  @parsed_bibtex = nil
+	else
+	  @parsed_bibtex.entries.each do |k, v|
+	    @bib_items[k] = v
+	  end
+	end
+      end
+    end
+
+    def delete_file
+      begin
+        unless filename.nil? || filename.empty?
+          File.delete(file)
+        end
+      rescue => e
+        logger.warn("Failed to delete file: #{e}")
+      end
+    end
+
+    def update_bibtex_key
+      begin
+        unless(@parsed_bibtex.nil?)
+          author = @parsed_bibtex[:author].split(/,/)[0]
+          key = "#{author}_#{id}"
+	  unless(@parsed_bibtex.nil? || @parsed_bibtex.key == key)
+	    @parsed_bibtex.key = key;
+	    update_attribute(:bibtex, @parsed_bibtex.to_s)
+          end
+        end
+      rescue => e
+	logger.error("Failed to set citation key for bibtex: #{e}")
+	logger.error("\t#{e.backtrace.join("\n\t")}")
+      end
+    end
+
+    def set_terms
+      terms.clear
+      @term_names.split(/\s*,\s*/).each do |name|
+	term = Term.first(:conditions => ['name=?', name])
+	if (term.nil?)
+	  term = Term.create(:name => name)
+	end
+	terms << term
+      end unless (@term_names.nil?)
+    end
+
 end

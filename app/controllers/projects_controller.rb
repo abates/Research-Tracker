@@ -18,6 +18,12 @@ class ProjectsController < ApplicationController
     send_file(backup, :filename => filename, :type => 'application/zip')
   end
 
+  # Get /projects/1
+  def bibtex
+    @project = Project.find(params[:id])
+    render :text, @project.bibtex
+  end
+
   # GET /projects/1
   # GET /projects/1.xml
   def show

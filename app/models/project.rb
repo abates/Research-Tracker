@@ -9,6 +9,16 @@ class Project < ActiveRecord::Base
   has_many :tasks
   has_many :documents
 
+  def bibtex
+    bibtex = ""
+    papers.each do |paper|
+      if (paper.bib_items.length > 0)
+        bibtex << "#{paper.bibtex}\n"
+      end
+    end
+    bibtex
+  end
+
   def to_s
     name
   end

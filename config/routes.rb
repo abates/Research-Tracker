@@ -2,6 +2,7 @@ Thesis::Application.routes.draw do
   resources :projects do
     member do
       get :backup
+      get :bibtex
     end
 
     resources :notes

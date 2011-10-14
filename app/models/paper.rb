@@ -5,6 +5,7 @@ class Paper < ActiveRecord::Base
   has_and_belongs_to_many :terms
   has_many :notes, :as => :notable
   after_save :set_terms, :update_bibtex_key
+  after_update :update_bibtex_key
   after_destroy :delete_file
   after_initialize :parse_bibtex
 
@@ -44,17 +45,21 @@ class Paper < ActiveRecord::Base
     def parse_bibtex
       @bib_items = {}
       unless bibtex.nil? || bibtex.empty?
-	@parsed_bibtex = BibTeX.parse(bibtex)[0]
+        begin
+	  @parsed_bibtex = BibTeX.parse(bibtex)[0]
 
-	if (@parsed_bibtex.instance_of? BibTeX::Error)
-	  @bib_items[:bibtex_parse_error] = @parsed_bibtex.content
-	  @bib_items[:bibtex_error_trace] = @parsed_bibtex.trace
-	  @parsed_bibtex = nil
-	else
-	  @parsed_bibtex.entries.each do |k, v|
-	    @bib_items[k] = v
+	  if (@parsed_bibtex.instance_of? BibTeX::Error)
+	    @bib_items[:bibtex_parse_error] = @parsed_bibtex.content
+	    @bib_items[:bibtex_error_trace] = @parsed_bibtex.trace
+	    @parsed_bibtex = nil
+	  else
+	    @parsed_bibtex.entries.each do |k, v|
+	      @bib_items[k] = v
+	    end
 	  end
-	end
+        rescue => e
+          logger.error("Something failed in bibtex processing: #{e}")
+        end
       end
     end
 
